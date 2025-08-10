@@ -17,7 +17,6 @@ const AuthClientButton = ({session}: {session :Session | null}) => {
         }
       }) 
     };
-
     const handleSignOut = async () => {
         await supabase.auth.signOut();
         router.refresh();
