@@ -1,0 +1,26 @@
+import Link from "next/link";
+import React from 'react'
+import { Button } from "@/components/ui/button"
+import AuthServerButton from "./auth/AuthServerButton";
+
+
+const header = () => {
+
+ 
+  return (
+    <div className="flex py-4 px-6 border-b  border-gray-200 ">
+        <Link href={'/'}>
+        <Button variant={"outline"}>ホーム</Button>
+        </Link>
+        <Link   href={'/priceing'} className="ml-4">
+        <Button variant={"outline"}>価格</Button>
+        </Link>
+        <div className="ml-auto" >
+          <AuthServerButton/>
+        </div>
+        {/* <Button  onClick={handleSignin}>ログイン</Button> */}
+    </div>
+  )
+}
+
+export default header
