@@ -24,5 +24,6 @@ SELECT * FROM auth.users
 <!-- gitの履歴を完全消去するやつ？ -->
 git-filter-repo
 
-
+<!-- stripeのモジュールをダウンロード -->
+npm i stripe
 
