@@ -27,3 +27,5 @@ git-filter-repo
 <!-- stripeのモジュールをダウンロード -->
 npm i stripe
 
+<!-- ランダムな文字列を生成する方法 -->
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
