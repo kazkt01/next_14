@@ -19,11 +19,10 @@ npx supabase gen types typescript --project-id rlgpmesweduwovoyoieu
 npx supabase gen types typescript --project-id rlgpmesweduwovoyoieu > src/lib/database.types.ts
 
 <!-- supabaseが管理しているユーザーの情報  -->
-
 SELECT * FROM auth.users
-
 
 <!-- gitの履歴を完全消去するやつ？ -->
 git-filter-repo
+
 
 
