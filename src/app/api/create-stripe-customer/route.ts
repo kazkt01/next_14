@@ -24,6 +24,9 @@ export async function POST(req: NextRequest) {
     })
     .eq("id",id);
 
+    // APIが叩かれているかテスト
+    console.log("HIT /api/create-stripe-customer");
+
 
  
     // デバック

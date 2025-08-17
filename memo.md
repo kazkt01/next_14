@@ -38,3 +38,10 @@ npm i -g ngrok
 ngrok config add-authtoken
 ngrok http 3000
 
+<!-- vercelのCLI -->
+npm i -g vercel
+
+
+<!-- youtubeなどのサードパーティ系をいい感じで扱えるようにするやつ -->
+<!-- バージョン周り合わせるため公式ではないやつ使用 -->
+npm i @next/third-parties@14
