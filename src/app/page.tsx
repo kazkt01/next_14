@@ -26,7 +26,7 @@ export default async function Home() {
         <div className="flex flex-col gap-4" >
           {lessons?.map((lesson) => (
             <Link href={`${lesson.id}`} key={lesson.id}>
-        <Card>
+          <Card>
             <CardHeader>
               <CardTitle>{lesson.title}</CardTitle>
               {/* <CardAction>Card Action</CardAction> */}
