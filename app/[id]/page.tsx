@@ -39,7 +39,7 @@ const LessonDetailPage = async ({params}: {params: {id: number}}) =>  {
          getPremiumContent(params.id,supabase),
     ])
     
-    const videoId = extractYouTubeVideoId(video?.video_url) as string ;
+    const videoId = extractYouTubeVideoId(video?.video_url) as string;
 
     console.log(video);
 
