@@ -1,7 +1,7 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers"
 import Link from "next/link";
-import { Card,  CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card,  CardContent, CardFooter, CardHeader, CardTitle } from "../components/ui/card";
 // import { Database } from "@/lib/database.types";
 
 const supabase = createServerComponentClient({cookies});

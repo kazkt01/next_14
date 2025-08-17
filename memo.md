@@ -16,7 +16,9 @@ npx supabase login
 <!-- supabaseのテーブルの型をCLIで作成する方法 -->
 npx supabase gen types typescript --project-id rlgpmesweduwovoyoieu
 <!-- リダイレクトでファイルに生成した型を保存する方法 -->
-npx supabase gen types typescript --project-id rlgpmesweduwovoyoieu > src/lib/database.types.ts
+npx supabase gen types typescript --project-id rlgpmesweduwovoyoieu > lib/database.types.ts
+
+
 
 <!-- supabaseが管理しているユーザーの情報  -->
 SELECT * FROM auth.users
