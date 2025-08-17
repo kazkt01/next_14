@@ -29,3 +29,9 @@ npm i stripe
 
 <!-- ランダムな文字列を生成する方法 -->
 node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+
+<!-- localhost:3000を一時的に外部へ公開する便利なサービス"ngrok"をインストール -->
+npm i -g ngrok
+
+<!-- そのngrokを使う方法 -->
+ngrok http 3000
