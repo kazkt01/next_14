@@ -34,4 +34,7 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 npm i -g ngrok
 
 <!-- そのngrokを使う方法 -->
+<!-- まずは、アクセストークンを追加 -->
+ngrok config add-authtoken
 ngrok http 3000
+

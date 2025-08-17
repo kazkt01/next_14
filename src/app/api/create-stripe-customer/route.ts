@@ -11,14 +11,13 @@ export async function POST(req: NextRequest) {
             message: "APIを叩く権限がありません",
         })
     }
-
     const data = await req.json();
-    const { id, email } = data;
+
+    const { id, email } = data.record;
     const stripe = new initiStripe(process.env.STRIPE_SECRET_KEY!);
     const customer = await stripe.customers.create({
         email,
     });
-
     // POSTMANのAPIテストする際は、Cookies参照させないと正常に動かないのでヘッダーにCookiesを登録しておこう。　
     await supabase.from("profile").update({
         stripe_customer: customer.id,
