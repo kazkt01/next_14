@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
         email,
     });
     
-    // POSTMANのAPIテストする際は、Cookies参照させないと正常に動かないのでヘッダーにCookiesを登録しておこう。
+    // POSTMANのAPIテストする際は、Cookies参照させないと正常に動かないのでヘッダーにCookiesを登録しておこう。　
     await supabase.from("profile").update({
         stripe_customer: customer.id,
     })
