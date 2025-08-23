@@ -1,9 +1,11 @@
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import React from 'react'
 import initStripe from "stripe"
 import type Stripe from "stripe"
+import {cookies} from "next/headers"
 
 interface Plan {
   id: string;
@@ -44,7 +46,15 @@ const getAllplans = async ():Promise<Plan[]> => {
 
 const PricingPage = async () => {
 
+  const supabase = createServerComponentClient({cookies});
+  const {data: user} = await supabase.auth.getSession();
+
+
   const plans = await getAllplans();
+
+  const showSubScribeButton = !!user.session && !profile.is_subscribed;
+  const showCreateAccountButton = !user.session;
+  const showManageSubscriptionButton = !!user.session && profile.is_subscribed;
 
   return (
     <div className='w-full max-w-3xl mx-auto py-16 flex justify-around' >
@@ -61,7 +71,9 @@ const PricingPage = async () => {
               <p>{plan.price} / {plan.interval}</p>
             </CardContent>
             <CardFooter>
-              <Button>サブスクリプションを契約する</Button>
+              {showSubScribeButton && <Button>サブスクリプションを契約する</Button>}
+              {showCreateAccountButton && <Button>ログインする</Button>}
+              {showManageSubscriptionButton && <Button>サブスクリプション管理する</Button>}
             </CardFooter>
           </Card>
         ))}
