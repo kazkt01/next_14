@@ -1,7 +1,7 @@
 "use client"
 import { createClientComponentClient, Session } from '@supabase/auth-helpers-nextjs'
 import React from 'react'
-import { Button } from '../ui/button'
+import { Button } from '../ui/button'; 
 import { useRouter } from 'next/navigation';
 
 const AuthClientButton = ({session}: {session :Session | null}) => {

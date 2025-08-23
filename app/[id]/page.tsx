@@ -1,15 +1,12 @@
 import React from "react" 
 import { cookies } from "next/headers"
 import { createServerComponentClient, SupabaseClient } from "@supabase/auth-helpers-nextjs";
-import { Database } from "../../lib/database.types";
 import { YouTubeEmbed } from "@next/third-parties/google"; 
-import { extractYouTubeVideoId } from "../../utils/extractYoutubeVideoId";
+import { extractYouTubeVideoId } from "@/utils/extractYoutubeVideoId";
+import { Database } from "@/lib/database.types";
 
 
-const getDetailLesson = async ( 
-    id: number, 
-    supabase: SupabaseClient<Database>
-) => {
+const getDetailLesson = async ( id: number, supabase: SupabaseClient<Database>) => {
     const {data: lesson } = await supabase
     .from("lesson")
     .select("*")
@@ -18,10 +15,7 @@ const getDetailLesson = async (
     return lesson;
 };
 
-const getPremiumContent = async ( 
-    id: number, 
-    supabase: SupabaseClient<Database>
-) => {
+const getPremiumContent = async ( id: number, supabase: SupabaseClient<Database>) => {
     const {data: video } = await supabase
     .from("premium_content")
     .select("video_url")
@@ -38,11 +32,16 @@ const LessonDetailPage = async ({params}: {params: {id: number}}) =>  {
          getDetailLesson(params.id, supabase),
          getPremiumContent(params.id,supabase),
     ])
-    
+
+    // 元のコード
     const videoId = extractYouTubeVideoId(video?.video_url) as string;
+    console.log(videoId);
 
-    console.log(video);
-
+    // AIに回収させたコード
+    // const videoId = video?.video_url
+    // ? extractYouTubeVideoId(video.video_url)
+    // : "";
+    
     return (
         <div className="w-full max-w-3xl mx-auto py-16 px-8">
             <h1 className="text-3xl mb-6">{lesson?.title}</h1>
