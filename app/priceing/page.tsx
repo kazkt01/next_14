@@ -61,7 +61,6 @@ const PricingPage = async () => {
   const [plans, profile] = await Promise.all([
        await getAllplans(),
        await getProfileData(supabase),
-
   ]);
 
 
