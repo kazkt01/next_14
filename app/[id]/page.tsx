@@ -33,8 +33,12 @@ const LessonDetailPage = async ({params}: {params: {id: number}}) =>  {
          getPremiumContent(params.id,supabase),
     ])
 
+
+    const url = video?.video_url ?? null;
+    // const videoId: string | null = url ? extractYouTubeVideoId(url) : "";
+    const videoId  = url ? (extractYouTubeVideoId(url) ?? ""): "";
     // 元のコード
-    const videoId = extractYouTubeVideoId(video?.video_url) as string;
+    // const videoId = extractYouTubeVideoId(video?.video_url) as string;
     console.log(videoId);
 
     // AIに回収させたコード

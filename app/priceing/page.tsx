@@ -63,10 +63,9 @@ const PricingPage = async () => {
        await getProfileData(supabase),
   ]);
 
-
-  const showSubScribeButton = !!user.session && !profile.is_subscribed;
+  const showSubScribeButton = !!user.session && !profile?.is_subscribed;
   const showCreateAccountButton = !user.session;
-  const showManageSubscriptionButton = !!user.session && profile.is_subscribed;
+  const showManageSubscriptionButton = !!user.session && profile?.is_subscribed;
 
   return (
     <div className='w-full max-w-3xl mx-auto py-16 flex justify-around' >
