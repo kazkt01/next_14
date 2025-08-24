@@ -12,6 +12,10 @@ export async function GET(
     const {data} = await supabase.auth.getUser();
     const user = data.user;
 
+    if (!user) {
+        return NextResponse.json("Unauthorized", {status:401});
+    } 
+
     const {data: stripe_customer_data } = await supabase
     .from("profile")
     .select("stripe_customer")

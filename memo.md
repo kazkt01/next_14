@@ -47,3 +47,6 @@ npm i -g vercel
 <!-- youtubeなどのサードパーティ系をいい感じで扱えるようにするやつ -->
 <!-- バージョン周り合わせるため公式ではないやつ使用 -->
 npm i @next/third-parties@14
+
+<!-- ストライプのリダイレクトさせるモジュールをインストール -->
+npm i @stripe/stripe-js
