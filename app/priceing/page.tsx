@@ -1,11 +1,13 @@
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { createServerComponentClient, SupabaseClient } from '@supabase/auth-helpers-nextjs'
 import React from 'react'
 import initStripe from "stripe"
 import type Stripe from "stripe"
 import {cookies} from "next/headers"
+import { Database } from '@/lib/database.types'
+import SubscriptionButton from '@/components/checkout/SubscriptionButton'
 
 interface Plan {
   id: string;
@@ -44,13 +46,24 @@ const getAllplans = async ():Promise<Plan[]> => {
   return sortedPlans;
 } 
 
+
+  const getProfileData = async (supabase: SupabaseClient<Database>) => {
+    const {data: profile } = await supabase.from("profile").select("*").single();
+    return profile;
+};
+
 const PricingPage = async () => {
 
   const supabase = createServerComponentClient({cookies});
   const {data: user} = await supabase.auth.getSession();
 
 
-  const plans = await getAllplans();
+  const [plans, profile] = await Promise.all([
+       await getAllplans(),
+       await getProfileData(supabase),
+
+  ]);
+
 
   const showSubScribeButton = !!user.session && !profile.is_subscribed;
   const showCreateAccountButton = !user.session;
@@ -71,7 +84,7 @@ const PricingPage = async () => {
               <p>{plan.price} / {plan.interval}</p>
             </CardContent>
             <CardFooter>
-              {showSubScribeButton && <Button>サブスクリプションを契約する</Button>}
+              {showSubScribeButton && <SubscriptionButton planId={plan.id} />}
               {showCreateAccountButton && <Button>ログインする</Button>}
               {showManageSubscriptionButton && <Button>サブスクリプション管理する</Button>}
             </CardFooter>
