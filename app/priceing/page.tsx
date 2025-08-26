@@ -48,19 +48,23 @@ const getAllplans = async ():Promise<Plan[]> => {
 
 
   const getProfileData = async (supabase: SupabaseClient<Database>) => {
-    const {data: profile } = await supabase.from("profile").select("*").single();
+    const {data: profile } = await supabase
+    .from("profile")
+    .select("*")
+    .single();
     return profile;
 };
 
 const PricingPage = async () => {
 
   const supabase = createServerComponentClient({cookies});
+  // const {data: user} = await supabase.auth.getSession();
   const {data: user} = await supabase.auth.getSession();
 
 
   const [plans, profile] = await Promise.all([
-       await getAllplans(),
-       await getProfileData(supabase),
+    getAllplans(),
+    getProfileData(supabase),
   ]);
 
   const showSubScribeButton = !!user.session && !profile?.is_subscribed;
