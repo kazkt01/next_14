@@ -19,7 +19,6 @@ const getPremiumContent = async ( id: number, supabase: SupabaseClient<Database>
     const {data: video } = await supabase
     .from("premium_content")
     .select("video_url")
-    .eq("id", id)
     .single();
     return video;
 };
@@ -41,7 +40,7 @@ const LessonDetailPage = async ({params}: {params: {id: number}}) =>  {
     // const videoId = extractYouTubeVideoId(video?.video_url) as string;
     console.log(videoId);
 
-    // AIに回収させたコード
+    // AIに改修させたコード
     // const videoId = video?.video_url
     // ? extractYouTubeVideoId(video.video_url)
     // : "";
