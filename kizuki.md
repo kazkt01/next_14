@@ -16,3 +16,4 @@ git checkout -b 作りたいブランチ名 origin/main
 git checkout -b test origin/main
 <!-- プッシュ時にリモートに作りたいブランチ名を作成してプッシュ -->
 git push -u origin 作りたいブランチ名
+git push -u origin test
