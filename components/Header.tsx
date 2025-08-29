@@ -12,7 +12,7 @@ const header = () => {
         <Link href={'/'}>
         <Button variant={"outline"}>ホーム</Button>
         </Link>
-        <Link   href={'/priceing'} className="ml-4">
+        <Link   href={'/pricing'} className="ml-4">
         <Button variant={"outline"}>価格</Button>
         </Link>
         <div className="ml-auto" >
