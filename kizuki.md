@@ -4,3 +4,13 @@
 
 メモは、Qiitaに書いて
 githubは、個人でもブランチ分けて開発して差分がわかるようにするのが良さげ←運用は記事見てどうするか確認いるけど
+
+以下 ブランチで開発手順
+
+git fetch origin
+
+git checkout -b 作りたいブランチ名 origin/main git checkout -b test origin/main
+
+git push -u origin 作りたいブランチ名 git push -u origin test
+
+
