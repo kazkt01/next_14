@@ -4,9 +4,12 @@ import { cookies } from "next/headers"
 import Link from "next/link";
 // import { Database } from "@/lib/database.types";
 
-const supabase = createServerComponentClient({cookies});
+// ここに書くとダメみたい　2025/08/30
+// const supabase = createServerComponentClient({cookies});
 
 const getAllLessons = async () => {
+
+  const supabase = createServerComponentClient({cookies});
   // これは、SSRかSSGかでいうとSSGになるとのこと
   // <Database>というジェネリクスという書き方で方を動的に指定できる？
   const {data: lessons } = await supabase.from("lesson").select("*");

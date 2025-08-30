@@ -1,3 +1,5 @@
+// 👇 ページを動的化（SSG中に cookies() が呼ばれて落ちるのを防ぐ）
+export const dynamic = 'force-dynamic';
 import React from "react" 
 import { cookies } from "next/headers"
 import { createServerComponentClient, SupabaseClient } from "@supabase/auth-helpers-nextjs";
@@ -32,18 +34,10 @@ const LessonDetailPage = async ({params}: {params: {id: number}}) =>  {
          getPremiumContent(params.id,supabase),
     ])
 
-
     const url = video?.video_url ?? null;
-    // const videoId: string | null = url ? extractYouTubeVideoId(url) : "";
     const videoId  = url ? (extractYouTubeVideoId(url) ?? ""): "";
-    // 元のコード
-    // const videoId = extractYouTubeVideoId(video?.video_url) as string;
     console.log(videoId);
 
-    // AIに改修させたコード
-    // const videoId = video?.video_url
-    // ? extractYouTubeVideoId(video.video_url)
-    // : "";
     
     return (
         <div className="w-full max-w-3xl mx-auto py-16 px-8">
