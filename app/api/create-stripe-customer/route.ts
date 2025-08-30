@@ -4,6 +4,9 @@ import initStripe from "stripe";
 import {cookies} from "next/headers"
 // import {createClient} from "@supabase/supabase-js"
 
+// ai add
+export const runtime = "nodejs"; 
+
 export async function POST(req: NextRequest) {
     const supabase = createRouteHandlerClient({ cookies });
 
@@ -19,8 +22,11 @@ export async function POST(req: NextRequest) {
     //     });
     // }
 
-    const data = await req.json();
-    const { id, email } = data.record;
+    // const data = await req.json();
+    // const { id, email } = data.record;
+    // ai add
+    const body = await req.json();
+     const { id, email } = body.record ?? body;
 
     console.log("🔥 HIT /api/create-stripe-customer"); // APIに到達したか確認
 
