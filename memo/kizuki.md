@@ -15,6 +15,3 @@ git push -u origin 作りたいブランチ名 git push -u origin test
 
 ちなみにvscodeのpeacockとかい色付け拡張機能まさかのブランチごとにも設定できるっぽい優れもので笑う
 
-
-
-
