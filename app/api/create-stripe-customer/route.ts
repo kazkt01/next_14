@@ -30,8 +30,10 @@ export async function POST(req: NextRequest) {
         email,
     });
 
-    // POSTMANのAPIテストする際は、Cookies参照させないと正常に動かないのでヘッダーにCookiesを登録しておこう。　
-    const { error } = await supabase
+    // POSTMANのAPIテストする際は、Cookies参照させないと正常に動かないのでヘッダーにCookiesを登録しておこう。
+    // EsLINTエラーの受け取りかでひっかかってエラーになる
+    // const { error } = await supabase
+    await supabase
     .from("profile")
     .update({ stripe_customer: customer.id,})
     .eq("id", id);
