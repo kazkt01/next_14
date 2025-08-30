@@ -3,9 +3,16 @@
 ・一旦のログインまわりと決済まわりを完成させる
 
 
-auth.uid() = id
+time:20:05
 
+現状、解決したこととして
+１、vercelにstripeのシークレットキーや.envの中身を登録したことでデプロイのエラーが解消
+２、本番環境でのテストを可能にした
+３、supabaseのauthenticationのconfigでURLを本番環境に変更することで本番環境でのログインエラーを解消
 
+課題
+1、cookieの取り扱いでsupabase側のstripe_customerカラムにデータが入らない問題
+localhost3000番を使用しPOSTMANでリクエストを送ってみたところstripe_customerに入れるデータは、作成できている様子
 
 2025/08/17
 ngrokで一時的に外部サーバーへ公開したアプリで
