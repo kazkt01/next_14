@@ -8,6 +8,7 @@ import type Stripe from "stripe"
 import {cookies} from "next/headers"
 import { Database } from '@/lib/database.types'
 import SubscriptionButton from '@/components/checkout/SubscriptionButton'
+import AuthServerButton from '@/components/auth/AuthServerButton'
 
 interface Plan {
   id: string;
@@ -87,7 +88,7 @@ const PricingPage = async () => {
             </CardContent>
             <CardFooter>
               {showSubScribeButton && <SubscriptionButton planId={plan.id} />}
-              {showCreateAccountButton && <Button>ログインする</Button>}
+              {showCreateAccountButton && <AuthServerButton/> }
               {showManageSubscriptionButton && <Button>サブスクリプション管理する</Button>}
             </CardFooter>
           </Card>
