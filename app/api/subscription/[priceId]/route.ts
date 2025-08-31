@@ -1,7 +1,10 @@
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs"
 import { NextRequest, NextResponse } from "next/server";
-import { cookies } from "next/headers"
-import initStripe from "stripe"
+import { cookies } from "next/headers";
+import initStripe from "stripe";
+
+export const runtime = 'nodejs';
+
 
 export async function GET(
     req: NextRequest,
