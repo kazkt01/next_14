@@ -7,7 +7,7 @@ export const runtime = 'nodejs';
 
 
 export async function GET(
-    req: NextRequest,
+req: NextRequest,
     { params }: { params: { priceId: string } }
 ) {
 
