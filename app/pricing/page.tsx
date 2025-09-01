@@ -9,6 +9,8 @@ import {cookies} from "next/headers"
 import { Database } from '@/lib/database.types'
 import SubscriptionButton from '@/components/checkout/SubscriptionButton'
 import AuthServerButton from '@/components/auth/AuthServerButton'
+import Link from 'next/link'
+
 
 interface Plan {
   id: string;
@@ -89,7 +91,13 @@ const PricingPage = async () => {
             <CardFooter>
               {showSubScribeButton && <SubscriptionButton planId={plan.id} />}
               {showCreateAccountButton && <AuthServerButton/> }
-              {showManageSubscriptionButton && <Button>サブスクリプション管理する</Button>}
+            {showManageSubscriptionButton &&
+              <Button>
+                <Link href="/dashboard">
+                サブスクリプション管理する
+                </Link>
+              </Button>
+            }
             </CardFooter>
           </Card>
         ))}
