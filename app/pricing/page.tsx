@@ -56,7 +56,7 @@ const getAllplans = async ():Promise<Plan[]> => {
     .select("*")
     .single();
     return profile;
-};
+  };
 
 const PricingPage = async () => {
 
