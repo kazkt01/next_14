@@ -6,14 +6,13 @@ import { Database } from "@/lib/database.types";
 export const runtime = "nodejs";
 
 
-
 export async function POST(req: NextRequest) {
     const supabase = createRouteHandlerClient<Database>({ cookies });
     const stripe = new initStripe(process.env.STRIPE_SECRET_KEY!)
     const signature = req.headers.get("stripe-signature")
     const endpointSecret = process.env.STRIPE_SIGNING_SECRET;
 
-    const reqBuffer = Buffer.from(await req.arrayBuffer())
+    const reqBuffer = Buffer.from(await req.arrayBuffer());
 
     let event;
 
@@ -23,6 +22,7 @@ export async function POST(req: NextRequest) {
             signature!,
             endpointSecret!,
         );
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
         return NextResponse.json(`webhook Error: ${err.message}`, {status: 401})
     }
@@ -34,47 +34,9 @@ export async function POST(req: NextRequest) {
                 is_subscribed: true,
                 interval: customerSubscriptionCreated.items.data[0].plan.interval
             })
-            .eq("stripe_customer", event.data.object.customer);
+            .eq("stripe_customer", event.data.object.customer as string);
     }
     return NextResponse.json({ received: true });
     // console.log("webhook dispatch");
     // return NextResponse.json({ received: true })
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// // app/api/stripe-hooks/route.ts
-// import { NextRequest, NextResponse } from "next/server";
-// export const runtime = "nodejs";
-// export const dynamic = "force-dynamic";
-
-// export async function POST(req: NextRequest) {
-//   const sig = req.headers.get("stripe-signature");
-//   const ua = req.headers.get("user-agent");
-//   const raw = await req.text();
-//   console.log("webhook dispatch", { fromStripe: !!sig, ua, len: raw.length });
-//   return NextResponse.json({ received: true }, { status: 200 });
-// }
