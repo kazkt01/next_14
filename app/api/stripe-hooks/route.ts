@@ -5,7 +5,6 @@ import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { Database } from "@/lib/database.types";
 export const runtime = "nodejs";
 
-
 export async function POST(req: NextRequest) {
     const supabase = createRouteHandlerClient<Database>({ cookies });
     const stripe = new initStripe(process.env.STRIPE_SECRET_KEY!)
@@ -34,7 +33,47 @@ export async function POST(req: NextRequest) {
                 is_subscribed: true,
                 interval: customerSubscriptionCreated.items.data[0].plan.interval
             })
-            .eq("stripe_customer", event.data.object.customer as string);
+            // .eq("stripe_customer", event.data.object.customer as string);
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            .eq("stripe_customer", (event.data.object as any).customer as string)
+            break;
+        case "customer.subscription.updated":
+            const customerSubscriptionUpadated = event.data.object;
+            // cancelされた時のみUPDATEが走る的な感じに条件分岐
+            if (customerSubscriptionUpadated.status === "canceled") {   
+                await supabase
+                .from("profile")
+                .update({
+                    is_subscribed: false,
+                    interval: null,
+                })
+                    // .eq("stripe_customer", event.data.object.customer as string)
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                .eq("stripe_customer", (event.data.object as any).customer as string)
+            break;    
+            } else {
+                await supabase
+                    .from("profile")
+                    .update({
+                        is_subscribed: true,
+                        interval: customerSubscriptionUpadated.items.data[0].plan.interval,
+                    })
+                    // .eq("stripe_customer", event.data.object.customer as string)
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                .eq("stripe_customer", (event.data.object as any).customer as string)
+            break;
+            }      
+        case "customer.deleted":
+            await supabase
+                .from("profile")
+                .update({
+                    is_subscribed: false,
+                    interval: null,
+                })
+                // .eq("stripe_customer", event.data.object.customer as string)
+                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                 .eq("stripe_customer", (event.data.object as any).customer as string)
+            break;
     }
     return NextResponse.json({ received: true });
     // console.log("webhook dispatch");
