@@ -1,14 +1,13 @@
-import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { NextRequest, NextResponse } from "next/server";
 import initStripe from "stripe";
-import {cookies} from "next/headers"
+import { supabaseRouteHandlerClient } from "@/utils/supabaseRouteHandlerClient";
 // import {createClient} from "@supabase/supabase-js"
 
 // ai add
 export const runtime = "nodejs"; 
 
 export async function POST(req: NextRequest) {
-    const supabase = createRouteHandlerClient({ cookies });
+    const supabase = supabaseRouteHandlerClient();
 
 // cookiesが原因でstripe_customerカラムにデータが入らないことを特定
 //   const { data: { user }, error,} = await supabase.auth.getUser();

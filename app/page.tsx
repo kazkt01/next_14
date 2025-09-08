@@ -1,15 +1,14 @@
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers"
+import { SupabaseClient } from "@supabase/auth-helpers-nextjs";
 import Link from "next/link";
+import { supabaseServer } from "@/utils/supabaseServer";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Database } from "@/lib/database.types";
 // import { Database } from "@/lib/database.types";
 
 // ここに書くとダメみたい　2025/08/30
 // const supabase = createServerComponentClient({cookies});
 
-const getAllLessons = async () => {
-
-  const supabase = createServerComponentClient({cookies});
+const getAllLessons = async (supabase: SupabaseClient<Database>) => {
   // これは、SSRかSSGかでいうとSSGになるとのこと
   // <Database>というジェネリクスという書き方で方を動的に指定できる？
   const {data: lessons } = await supabase.from("lesson").select("*");
@@ -18,8 +17,9 @@ const getAllLessons = async () => {
 
 
 export default async function Home() {
+  const supabase = supabaseServer();
 
-  const lessons = await getAllLessons();
+  const lessons = await getAllLessons(supabase);
 
   return (
       <main className="w-full max-w-3xl mx-auto my-16 px-2">
