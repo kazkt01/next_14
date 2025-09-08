@@ -34,8 +34,8 @@ req: NextRequest,
         mode: "subscription",
         payment_method_types: ["card"],
         line_items: [{ price: priceId, quantity: 1 }],
-        success_url: "https://next-14-self.vercel.app/payment/success",
-        cancel_url: "https://next-14-self.vercel.app/payment/cancelled",
+        success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/payment/success`,
+        cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/payment/cancelled`,
         
     });
     return NextResponse.json({ id: session.id });

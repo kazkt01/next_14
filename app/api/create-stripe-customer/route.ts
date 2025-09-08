@@ -43,9 +43,6 @@ export async function POST(req: NextRequest) {
     .from("profile")
     .update({ stripe_customer: customer.id,})
     .eq("id", id);
-
-
-    
     // console.log("profile select:", data, error);
     
     // console.log(id, customer.id);

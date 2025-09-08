@@ -50,3 +50,9 @@ npm i @next/third-parties@14
 
 <!-- ストライプのリダイレクトさせるモジュールをインストール -->
 npm i @stripe/stripe-js
+
+
+<!-- supabaseの型作成コマンド -->
+
+npm run db:types
+

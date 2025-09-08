@@ -27,7 +27,7 @@ export async function GET(_req: NextRequest) {
 
     const session = await stripe.billingPortal.sessions.create({
         customer: stripe_customer_data?.stripe_customer,
-        return_url: `https://next-14-self.vercel.app/dashboard`
+        return_url: `${process.env.NEXT_PUBLIC_BASE_URL}/dashboard`
     });
     return NextResponse.json({ url:session.url });
 }
