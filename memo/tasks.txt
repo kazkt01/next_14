@@ -1,7 +1,34 @@
+9月13日(土)
+一旦
+サブスクのキャンセル・契約
+有料コンテンツの出しわけ
+ログイン回りを完成させた。
+次は、復習と微修正を繰り返して仕上げていこう。
+
+
+
+
+2025/09/13
+そもそもなんでstripe_customerが作成されてsupabaseのカラムにデータが入るのかを理解した方が早そうだ。
+
+
+
+
+
 
 2025/09/10
 現状できていないところ
-・Subscription契約時にstripe_customerカラムにデータが入らない問題の解決
+stripe_customerカラムにデータがはいらない問題　←これ解決できたらサブスク契約ボタンが動く
+
+仕組みとしは、supabaseのwebhookでAPPにサインインした段階で自動的にapi/create-stripe-customer
+が叩かれてstripe顧客が作成されその作成された顧客のID？がsupabaseのstripe_customerにデータが入る仕組みにしている
+
+試したこと
+
+RLSをUPDATEとSELECTを全て  (auth.uid() = id)　から true　にして緩めたが変化なし
+
+
+
 
 
 2025/08/30
