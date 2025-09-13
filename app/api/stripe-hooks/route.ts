@@ -1,10 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import initStripe from "stripe";
-import { supabaseRouteHandlerClient } from "@/utils/supabaseRouteHandlerClient";
+import { createClient } from "@supabase/supabase-js";
+
 export const runtime = "nodejs";
 
 export async function POST(req: NextRequest) {
-    const supabase = supabaseRouteHandlerClient();
+    // const supabase = supabaseRouteHandlerClient();
+
+    // ↓簡易修正
+    const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!);
+
     const stripe = new initStripe(process.env.STRIPE_SECRET_KEY!)
     const signature = req.headers.get("stripe-signature")
     const endpointSecret = process.env.STRIPE_SIGNING_SECRET;
