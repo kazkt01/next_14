@@ -21,6 +21,7 @@ const getPremiumContent = async ( id: number, supabase: SupabaseClient<Database>
     const {data: video } = await supabase
     .from("premium_content")
     .select("video_url")
+    .eq("lesson_id",id)
     .single();
     return video;
 };
