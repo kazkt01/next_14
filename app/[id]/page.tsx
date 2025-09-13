@@ -37,7 +37,8 @@ const LessonDetailPage = async ({params}: {params: {id: number}}) =>  {
 
     const url = video?.video_url ?? null;
     const videoId  = url ? (extractYouTubeVideoId(url) ?? ""): "";
-    console.log(videoId);
+    // console.log(videoId);
+    console.log({ url: video?.video_url, videoId });
 
     
     return (
