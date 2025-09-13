@@ -35,9 +35,9 @@ export default async function Home() {
             <CardContent>
               <p>{lesson.description}</p>
             </CardContent>
-            <CardFooter>
+            {/* <CardFooter>
               <p>Card Footer</p>
-            </CardFooter>
+            </CardFooter> */}
           </Card>
          </Link>
           ))}
