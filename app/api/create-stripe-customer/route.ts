@@ -1,6 +1,7 @@
+import { createClient } from "@supabase/supabase-js";
 import { NextRequest, NextResponse } from "next/server";
 import initStripe from "stripe";
-import { supabaseRouteHandlerClient } from "@/utils/supabaseRouteHandlerClient";
+// import { supabaseRouteHandlerClient } from "@/utils/supabaseRouteHandlerClient";
 
 // node.jsランタイムで動かす指定、Stripe SDKを使うためにEdgeじゃなくNodeにしている
 export const runtime = "nodejs"; 
@@ -8,8 +9,12 @@ export const runtime = "nodejs";
 // APIのエントリーポイントでHTTP POSTで叩かれている。
 export async function POST(req: NextRequest) {
     // supabaseクライアントを作成　ここWebhookからCookieが来ない問題　↓ここが一番問題の可能性がある。
-    const supabase = supabaseRouteHandlerClient();
-    
+    // const supabase = supabaseRouteHandlerClient();
+
+    // ↓簡易修正
+    const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!);
+
+
     //セキュリティチェック 
     const query = req.nextUrl.searchParams.get("API_ROUTE_SECRET");
     if (query !== process.env.API_ROUTE_SECRET) {
@@ -23,7 +28,7 @@ export async function POST(req: NextRequest) {
     console.log("🔥 Webhook payload:", JSON.stringify(data, null, 2));
 
     // idとemailを取り出す。　しかし、実際は、recordフィールどにデータを持つからここがミスってる可能性も？
-    const { id, email } = data;
+    const { id, email } = data.record;
 
     // stripeの初期化
     const stripe = new initStripe(process.env.STRIPE_SECRET_KEY!);
@@ -42,8 +47,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
         message: `stripe customer created: ${customer.id}`,
-    });
-    
+    });  
 }
 
 
